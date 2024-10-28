@@ -1,7 +1,8 @@
+import PropTypes from "prop-types"
 import { useState } from "react"
 
 
-export const FormAddTodo = ({createTodo}) => {
+export const FormAddTodo = ({ createTodo }) => {
   const [inputValue, setInputValue] = useState('')
 
   const handleSubmit = (event) => {
@@ -22,4 +23,7 @@ export const FormAddTodo = ({createTodo}) => {
       />
     </form>
   )
+}
+FormAddTodo.propTypes = {
+  createTodo: PropTypes.func
 }

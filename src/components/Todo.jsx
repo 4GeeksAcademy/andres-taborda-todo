@@ -1,4 +1,4 @@
-
+import PropTypes from 'prop-types';
 
 export const Todo = ({ id, title, removeTodos }) => {
   return (
@@ -9,3 +9,11 @@ export const Todo = ({ id, title, removeTodos }) => {
     </div>
   )
 }
+
+Todo.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  removeTodos: PropTypes.func
+
+}
+

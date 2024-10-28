@@ -20,7 +20,7 @@ function App() {
     })
   }
   
-  const handleAddTodo = (title) => {
+   const handleAddTodo = (title) => {
     const wasAdded = todos.filter(task => task.title.toUpperCase() === title.toUpperCase())
     if (wasAdded.length > 0) {
       showSwal()

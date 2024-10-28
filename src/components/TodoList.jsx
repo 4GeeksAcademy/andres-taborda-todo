@@ -1,5 +1,5 @@
 import { Todo } from "./Todo"
-
+import PropTypes from 'prop-types';
 
 export const TodoList = ({ todos, removeTodos }) => {
   return (
@@ -13,5 +13,11 @@ export const TodoList = ({ todos, removeTodos }) => {
       }
     </ul>
   )
+}
+
+TodoList.propTypes = {
+  todos: PropTypes.array,
+  removeTodos: PropTypes.func
+
 }
 
