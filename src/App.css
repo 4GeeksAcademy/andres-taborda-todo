@@ -132,7 +132,7 @@ p {
 	color: #484848;
 }
 
-.todo-list li .destroy, .todo-list li .block {
+.destroy, .edit, .block {
 	display: none;
 	position: absolute;
 	top: 0;
@@ -141,21 +141,14 @@ p {
 	width: 40px;
 	height: 40px;
 	margin: auto 0;
-	font-size: 30px;
+	font-size: 25px;
 	color: #949494;
-	transition: color 0.2s ease-out;
+	transition: color 0.3s ease-out;
 }
 
-.todo-list li .destroy:hover,
-.todo-list li .destroy:focus {
+.destroy:hover,
+.destroy:focus {
 	color: #C18585;
-}
-
-.todo-list li .destroy:after {
-	content: '×';
-	display: block;
-	height: 100%;
-	line-height: 1.1;
 }
 
 .todo-list li:hover .destroy {
@@ -163,37 +156,34 @@ p {
 }
 
 /* btn block */
-.todo-list li .block {
-	display: none;
-	position: absolute;
-	top: 0;
+.block {
 	right: 100px;
-	bottom: 0;
-	width: 40px;
-	height: 40px;
-	margin: auto 0;
-	font-size: 30px;
-	color: #949494;
-	transition: color 0.3s ease-out;
 }
 
-.todo-list li .block:hover,
-.todo-list li .block:focus {
+.block:hover,
+.block:focus {
 	color: #C18585;
-}
-
-.todo-list li .block:after {
-	display: block;
-	height: 100%;
-	line-height: 1.1;
 }
 
 .todo-list li:hover .block {
 	display: block;
 }
+/* btn-edit */
 
+.edit {
+	right: 50px;
+}
 
+.edit:hover,
+.edit:focus {
+	color: #C18585;
+}
 
+.todo-list li:hover .edit {
+	display: block;
+}
+
+/* footer */
 .footer {
 	padding: 10px 15px;
 	height: 20px;

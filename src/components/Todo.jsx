@@ -11,10 +11,11 @@ export const Todo = ({ id, title, isSaved, removeTodos, lockTodo, unLockTodo}) =
           !isSaved ? <i className="fas fa-lock-open m-2"></i> : <i className="fas fa-lock"></i>
         }                
       </button>
-      {/* <button type="button" onClick={() => removeTodos(id)} className="destroy">
-        edit
-      </button> */}
+      <button type="button" onClick={() => removeTodos(id)} className="edit">
+        <i className="fas fa-edit"></i>
+      </button>
       <button type="button" onClick={() => removeTodos(id)} className="destroy">
+      <i className="fas fa-trash-alt"></i>
       </button>
     </div>
   )

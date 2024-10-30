@@ -5,7 +5,7 @@ import './App.css';
 import { Footer } from './components/Footer';
 import { FormAddTodo } from './components/FormAddTodo';
 import { TodoList } from './components/TodoList';
-import { todoReducer } from './reducer/todosReducer';
+import { todoReducer } from './reducers/todosReducer';
 
 const initialTodos = () => {
   return JSON.parse(localStorage.getItem("todos")) || []

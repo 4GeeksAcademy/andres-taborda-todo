@@ -3,29 +3,27 @@ import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-// const showSwal = () => {
-//   withReactContent(Swal).fire({
-//     icon: "error",
-//     title: <i>Something wrong!</i>,
-//     text: 'Task already exists'
+const showSwal = () => {
+  withReactContent(Swal).fire({
+    icon: "error",
+    title: `<i>Something wrong!</i>`,
+    text: 'Task already exists'
     
-//   })
-// }
+  })
+}
+
+const updateStorage = ( listTodos ) => {
+
+  localStorage.setItem("todos", JSON.stringify(
+    listTodos.filter(todo => todo.isSaved === true)
+  ))
+  return listTodos
+}
 
 
-export const todoReducer = (state, action) => {
-  
+export const todoReducer = (state, action) => { 
 
   const listTodos = [...state]
-  
-
-  const updateStorage = ( listTodos ) => {
-
-    localStorage.setItem("todos", JSON.stringify(
-      listTodos.filter(todo => todo.isSaved === true)
-    ))
-    return listTodos
-  }
 
   switch (action.type) {
     case "add_todo":
@@ -33,7 +31,7 @@ export const todoReducer = (state, action) => {
         const wasAdded = listTodos.filter(task => task.title.toUpperCase() === action.payload.title.toUpperCase())
 
         if (wasAdded.length > 0) {
-          alert("Task already exists")
+          showSwal()
           return state
         }
         const newTodo = {
