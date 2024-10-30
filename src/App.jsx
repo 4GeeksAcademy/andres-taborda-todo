@@ -33,6 +33,10 @@ function App() {
     dispatch({type: "unblock_todo", payload: { id: id }})
   }
 
+  const handleEditTodo = (title, id) => {
+    dispatch({type: "edit_todo", payload: { id: id, title: title }})
+  }
+
 
   return (
     <section className='todoapp'>
@@ -41,7 +45,15 @@ function App() {
         <FormAddTodo createTodo={handleAddTodo}/>     
       </header>
       {
-        state.length > 0 ? <TodoList todos={state} removeTodos={handleRemoveTodo} lockTodo={handleSavedStorageTodo} unLockTodo={handleDeleteStorageTodo}/> : <p>No hay tareas, añadir tareas</p>
+        state.length > 0 
+        ? <TodoList 
+            todos={state} 
+            removeTodos={handleRemoveTodo} 
+            lockTodo={handleSavedStorageTodo} 
+            unLockTodo={handleDeleteStorageTodo}
+            editTodo={handleEditTodo}
+          /> 
+        : <p>No hay tareas, añadir tareas</p>
       }
       <Footer todoItems={state.length}/>      
     </section>
