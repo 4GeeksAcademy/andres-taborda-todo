@@ -9,6 +9,7 @@ import { todoReducer } from './reducers/todosReducer';
 import { useFetchTodo } from './hooks/useFetchTodo';
 import { Auth } from './pages/auth/auth';
 import { Loader } from './components/Loader';
+import { Navbar } from './components/Navbar';
 
 
 
@@ -59,6 +60,11 @@ function App() {
     
   }
 
+  const handleLeave = () => {
+    localStorage.removeItem("user")
+    setIsAuthenticated({ username: "", isLogin : false })
+  }
+
   useEffect(() => {        
     const user = JSON.parse(localStorage.getItem("user"))
     
@@ -80,31 +86,34 @@ function App() {
 
   return (
     isAuthenticated.isLogin 
-  ? <section className='todoapp'>
-      <header className='header'>        
-        <h1>todos</h1> 
-        <FormAddTodo createTodo={handleAddTodo}/>     
-      </header>
-      {
-        state.length > 0 
-        ? <TodoList 
-            todos={state} 
-            removeTodos={handleRemoveTodo} 
-            lockTodo={handleSavedStorageTodo} 
-            unLockTodo={handleDeleteStorageTodo}
-            editTodo={handleEditTodo}
-          /> 
-        : (
-            <>
-              <p>No hay tareas, añadir tareas</p>
-              {isLoading && <Loader/>}
-            </>
+  ? <>
+      <Navbar username={isAuthenticated.username} leaveOut={handleLeave}/>
+      <section className='todoapp'>
+        <header className='header'>        
+          <h1>todos</h1> 
+          <FormAddTodo createTodo={handleAddTodo}/>     
+        </header>
+        {
+          state.length > 0 
+          ? <TodoList 
+              todos={state} 
+              removeTodos={handleRemoveTodo} 
+              lockTodo={handleSavedStorageTodo} 
+              unLockTodo={handleDeleteStorageTodo}
+              editTodo={handleEditTodo}
+            /> 
+          : (
+              <>
+                <p>No hay tareas, añadir tareas</p>
+                {isLoading && <Loader/>}
+              </>
 
-          )
-      }
-      <Footer todoItems={state.length}/> 
-      {error && <p>{error}</p> }   
-    </section>
+            )
+        }
+        <Footer todoItems={state.length}/> 
+        {error && <p>{error}</p> }   
+      </section>
+    </>
   : <Auth login={setIsAuthenticated}/>
   )
 }

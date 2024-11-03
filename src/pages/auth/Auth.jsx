@@ -19,7 +19,7 @@ export const Auth = ({ login }) => {
   useEffect(() => {
     if (userName) {
       localStorage.setItem("user", JSON.stringify(userName.name))
-      login(prev => ({...prev, username:userName, isLogin: true}))
+      login(prev => ({...prev, username:userName.name, isLogin: true}))
     }  
     
   }, [login, userName]);

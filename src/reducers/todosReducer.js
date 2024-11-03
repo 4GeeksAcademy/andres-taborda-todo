@@ -12,13 +12,13 @@ const showSwal = (message) => {
   })
 }
 
-const updateStorage = ( listTodos ) => {
+// const updateStorage = ( listTodos ) => {
 
-  localStorage.setItem("todos", JSON.stringify(
-    listTodos.filter(todo => todo.isSaved === true)
-  ))
-  return listTodos
-}
+//   localStorage.setItem("todos", JSON.stringify(
+//     listTodos.filter(todo => todo.isSaved === true)
+//   ))
+//   return listTodos
+// }
 
 
 export const todoReducer = (state, action) => { 
@@ -57,7 +57,6 @@ export const todoReducer = (state, action) => {
           return state
         }
         const updatesTodo = listTodos.map(todo => todo.id === action.payload.id ? {...todo, label: action.payload.title}: todo)
-        updateStorage(updatesTodo)
         return updatesTodo
       }
     case "delete_todo":
