@@ -5,13 +5,11 @@ export const TodoList = ({ todos, removeTodos, lockTodo, unLockTodo, editTodo })
   return (
     <ul className="todo-list">
       {
-        todos.map(({id, title, isSaved}) => (
-          <li key={id}>
+        todos.map((todo) => (
+          <li key={todo.id}>
             <Todo 
-              title={title} 
-              removeTodos={removeTodos} 
-              id={id} 
-              isSaved={isSaved} 
+              todo={todo} 
+              removeTodos={removeTodos}  
               lockTodo={lockTodo} 
               unLockTodo={unLockTodo}
               editTodo={editTodo}

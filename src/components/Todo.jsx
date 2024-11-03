@@ -1,27 +1,29 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-export const Todo = ({ id, title, isSaved, removeTodos, lockTodo, unLockTodo, editTodo}) => {
-  const [isEditing, setisEditing] = useState(false);
-  const [inputValue, setInputValue] = useState(title)
+export const Todo = ({ todo, removeTodos, lockTodo, unLockTodo, editTodo}) => {
+  const { label, id, isSaved } = todo
+  const [isEditing, setIsEditing] = useState(false);
+  const [inputValue, setInputValue] = useState(label)
 
   const handleEdit = () => {
-    setisEditing(true)
+    setIsEditing(true)
   }
 
   const handleSubmit = (event) => {
-    event.target.value
-    editTodo(inputValue, id)
-    setisEditing(false)
+    event.preventDefault()
+    editTodo(inputValue, todo)
+    setIsEditing(false)
   }
 
   return (
     <div>
       {
+        
         !isEditing 
         ? <>
-            <label>{title}</label>
-            <button type="button" onClick={!isSaved ? () => lockTodo(id) : () => unLockTodo(id) } className="block">
+            <label>{label}</label>
+            <button type="button" onClick={!isSaved ? () => lockTodo(label) : () => unLockTodo(id) } className="block">
               {
                 !isSaved ? <i className="fas fa-lock-open m-2"></i> : <i className="fas fa-lock"></i>
               }                
@@ -29,13 +31,13 @@ export const Todo = ({ id, title, isSaved, removeTodos, lockTodo, unLockTodo, ed
             <button type="button" onClick={() => handleEdit(id)} className="edit">
               <i className="fas fa-edit"></i>
             </button>
-            <button type="button" onClick={() => removeTodos(id)} className="destroy">
+            <button type="button" onClick={() => removeTodos(todo)} className="destroy">
               <i className="fas fa-trash-alt"></i>
             </button>
           </>
         : <form onSubmit={handleSubmit}>
             <input
-              defaultValue={title}
+              defaultValue={label}
               onChange={(event) => { setInputValue(event.target.value)  }}
               autoFocus
               type="text"
@@ -49,13 +51,10 @@ export const Todo = ({ id, title, isSaved, removeTodos, lockTodo, unLockTodo, ed
 }
 
 Todo.propTypes = {
-  id: PropTypes.string,
-  title: PropTypes.string,
+  todo: PropTypes.object,
   removeTodos: PropTypes.func,
   lockTodo: PropTypes.func,
   unLockTodo: PropTypes.func,
   editTodo: PropTypes.func,
-  isSaved: PropTypes.bool
-
 }
 

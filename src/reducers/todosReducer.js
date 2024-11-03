@@ -22,14 +22,21 @@ const updateStorage = ( listTodos ) => {
 
 
 export const todoReducer = (state, action) => { 
-  console.log("copia");
   
   const listTodos = [...state]
 
   switch (action.type) {
+
+    case "update_todos":{ 
+      
+      
+      return [...action.payload.todos]
+
+    }
+    
     case "add_todo":
       {
-        const wasAdded = listTodos.filter(task => task.title.toUpperCase() === action.payload.title.toUpperCase())
+        const wasAdded = listTodos.filter(task => task.label.toUpperCase() === action.payload.title.toUpperCase())
 
         if (wasAdded.length > 0) {
           showSwal("Task already exists")
@@ -37,7 +44,7 @@ export const todoReducer = (state, action) => {
         }
         const newTodo = {
           id: uuidv4(),
-          title: action.payload.title,
+          label: action.payload.title,
           isSaved: false
         }
         return [...state, newTodo]
@@ -46,12 +53,10 @@ export const todoReducer = (state, action) => {
     case "edit_todo":
       {
         if (action.payload.title.trim().length < 2) {
-          console.log("Task name is required");
-          
           showSwal("Task name is required")
           return state
         }
-        const updatesTodo = listTodos.map(todo => todo.id === action.payload.id ? {...todo, title: action.payload.title}: todo)
+        const updatesTodo = listTodos.map(todo => todo.id === action.payload.id ? {...todo, label: action.payload.title}: todo)
         updateStorage(updatesTodo)
         return updatesTodo
       }
@@ -63,10 +68,10 @@ export const todoReducer = (state, action) => {
     case "block_todo":
       {       
         
-        const todoToSaved = listTodos.find(todo => todo.id === action.payload.id)
+        const todoToSaved = listTodos.find(todo => todo.label === action.payload.label)
         if (todoToSaved) {
           todoToSaved.isSaved = true                     
-          updateStorage( listTodos )
+          
           return listTodos 
         }
         return state
@@ -76,7 +81,7 @@ export const todoReducer = (state, action) => {
         const todoToSaved = listTodos.find(todo => todo.id === action.payload.id)
         if (todoToSaved) {
           todoToSaved.isSaved = false                     
-          updateStorage( listTodos )
+        
           return listTodos 
         }
         return state

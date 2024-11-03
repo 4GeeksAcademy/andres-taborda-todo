@@ -1,0 +1,1 @@
+export const baseUrl = 'https://playground.4geeks.com/todo'
